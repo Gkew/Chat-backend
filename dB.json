@@ -1,9 +1,41 @@
-{
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
-}
+[
+    {
+        "id": 1,
+        "name": "Emmi",
+        "email": "Anna@Anna.com",
+        "age": "11”,
+        "gender": "woman”
+},
+    {
+        "id": 2,
+        "name": "Axel",
+        "email": "Axel@Axel.com",
+        "age": "12”,
+        "gender": “man”
+    },
+    {
+        "id": 3,
+        "name": "Ganni",
+        "email": "Ganni@Ganni.com",
+        "age": "13”,
+        "gender": "woman”
+    }
+,
+    {
+        "id": 4,
+        "name": "Alex",
+        "email": "Alex@Alex.com",
+        "age": "14”,
+        "gender": "man”
+    }
+,
+    {
+        "id": 5,
+        "name": "Moha",
+        "email": "Moha@Moha.com",
+        "age": "15”,
+        "gender": "man”
+    }
+
+]
+
