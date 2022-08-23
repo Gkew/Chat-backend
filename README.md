@@ -18,7 +18,7 @@ _Starting server_ json-server --watch db.json
 
 ### Creating a real server and connectring to mongoDB  
 #### server.js
-
+``` js
 const express = require("express");
 const app = express();
 //Mockserver on PORT 3000
@@ -40,7 +40,7 @@ app.use(cors());
 app.listen(PORT, () => {
   console.log(`LISTENING ON PORT ${PORT}`);
 });
-
+```
 
 ### Creating user model schema for _users_  
 #### Models/users.js  
