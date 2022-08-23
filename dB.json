@@ -1,41 +1,29 @@
-[
+{
+  "users": [
     {
-        "id": 1,
-        "name": "Emmi",
-        "email": "Anna@Anna.com",
-        "age": "11”,
-        "gender": "woman”
-},
-    {
-        "id": 2,
-        "name": "Axel",
-        "email": "Axel@Axel.com",
-        "age": "12”,
-        "gender": “man”
+      "id": 1,
+      "name": "Mikaeliiiiiiii",
+      "age": "312"
     },
     {
-        "id": 3,
-        "name": "Ganni",
-        "email": "Ganni@Ganni.com",
-        "age": "13”,
-        "gender": "woman”
-    }
-,
+      "id": 2,
+      "name": "Axel",
+      "age": "2352"
+    },
     {
-        "id": 4,
-        "name": "Alex",
-        "email": "Alex@Alex.com",
-        "age": "14”,
-        "gender": "man”
-    }
-,
+      "id": 3,
+      "name": "Alex",
+      "age": "312"
+    },
     {
-        "id": 5,
-        "name": "Moha",
-        "email": "Moha@Moha.com",
-        "age": "15”,
-        "gender": "man”
+      "id": 4,
+      "name": "Ganni",
+      "age": "312"
+    },
+    {
+      "id": 5,
+      "name": "Moha",
+      "age": "312"
     }
-
-]
-
+  ]
+}

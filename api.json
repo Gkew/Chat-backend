@@ -1,0 +1,34 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "Emmi",
+        "age": "312"
+      },
+      {
+        "id": 2,
+        "name": "Axel",
+        "age": "2352"
+      },
+      {
+        "id": 3,
+        "name": "Alex",
+        "age": "312"
+      },
+      {
+        "id": 4,
+        "name": "Ganni",
+        "age": "312"
+      },
+      {
+        "id": 5,
+        "name": "Moha",
+        "age": "312"
+      },
+      {
+        "id": 6,
+        "name": "Mikaelzzzzzzzz",
+        "age": "312"
+      }
+    ]
+  }
