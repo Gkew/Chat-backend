@@ -1,7 +1,7 @@
 # Chat-backend
 
 ### Creating mockserver with npm
-npm i json-server
+npm i json-server  
 touch dB.json
 ``` json
 {
@@ -14,10 +14,10 @@ touch dB.json
   "profile": { "name": "typicode" }
 }
 ```
-json-server --watch db.json  
+_Starting server_ json-server --watch db.json  
 
-###Creating a real server and connectring to mongoDB  
-####server.js
+### Creating a real server and connectring to mongoDB  
+#### server.js
 ````js
 const express = require("express");
 const app = express();
@@ -42,8 +42,8 @@ app.listen(PORT, () => {
 });
 
 ```
-###Creating user model schema for _users_  
-####Models/users.js  
+### Creating user model schema for _users_  
+#### Models/users.js  
 ```js
 const mongoose = require('mongoose');
 const usersSchema = new mongoose.Schema({
