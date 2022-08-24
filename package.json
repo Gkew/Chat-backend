@@ -1,22 +1,24 @@
 {
   "dependencies": {
+    "chai": "*",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
     "json-server": "^0.17.0",
+    "mocha": "*",
     "mongodb": "^4.9.0",
     "mongoose": "^6.5.2",
     "node": "^16.17.0",
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "name": "chat-backend",
   "description": "### Creating mockserver with npm npm i json-server touch dB.json ``` json {   \"posts\": [     { \"id\": 1, \"title\": \"json-server\", \"author\": \"typicode\" }   ],   \"comments\": [     { \"id\": 1, \"body\": \"some comment\", \"postId\": 1 }   ],   \"profile\": { \"name\": \"typicode\" } } ``` json-server --watch db.json",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Gkew/Chat-backend.git"
