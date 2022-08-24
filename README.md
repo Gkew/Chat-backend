@@ -77,6 +77,10 @@ const User = mongoose.model('user', usersSchema);
 
 module.exports = User;
 ```
+### Installing npm for testing  
+_Bash_  
+npm i chai  
+npm i mocha  
 ### Creating CRUD for server.js with mongoDB  
 _Server.js_  
 ``` js
