@@ -5,13 +5,33 @@ npm i json-server
 touch dB.json
 ``` json
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "users": [
+    {
+      "id": 1,
+      "name": "Mikaeliiiiiiii",
+      "age": "312"
+    },
+    {
+      "id": 2,
+      "name": "Axel",
+      "age": "2352"
+    },
+    {
+      "id": 3,
+      "name": "Alex",
+      "age": "312"
+    },
+    {
+      "id": 4,
+      "name": "Ganni",
+      "age": "312"
+    },
+    {
+      "id": 5,
+      "name": "Moha",
+      "age": "312"
+    }
+  ]
 }
 ```
 _Starting server_ json-server --watch db.json  
