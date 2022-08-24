@@ -77,3 +77,64 @@ const User = mongoose.model('user', usersSchema);
 
 module.exports = User;
 ```
+### Creating CRUD for server.js with mongoDB  
+_Server.js_  
+``` js
+//Get, sending a string
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+//Get all users
+app.get("/allUser", async (req, res) => {
+  const client = new MongoClient(mongoDB);
+
+  try {
+    await client.connect();
+    const users = client.db("Chatt").collection("Users");
+    const response = await users.find().toArray();
+    res.send(response);
+  } finally {
+    await client.close();
+  }
+});
+//Post new users
+app.post("/postUser", async (req, res) => {
+  const client = new MongoClient(mongoDB);
+  const {user} = req.body
+
+  try {
+    await client.connect()
+
+
+    const collectionUser = client.db('Chatt').collection("Users");
+    const data = {
+      user : user,
+    }
+
+    await collectionUser.insertOne(data)
+    res.send(data)
+
+  } catch (err) {
+    console.log(err);
+  } finally {
+    await client.close();
+  }
+});
+//Delete ONE user by ID
+app.delete('/deleteUser/:id',async (req,res) =>{
+  const {id} = req.params
+  const client = new MongoClient(mongoDB);
+  try{
+    await client.connect()
+    const collectionUser = client.db('Chatt').collection("Users");
+
+    await collectionUser.findOneAndDelete({"_id": ObjectId(id)})
+
+    res.send('Deleted id: ' + id)
+  }catch (err){
+    console.log(err)
+  } finally {
+    await client.close()
+  }
+})
+```
