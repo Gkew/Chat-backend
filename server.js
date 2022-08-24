@@ -62,7 +62,7 @@ app.post("/postUser", async (req, res) => {
     await client.close();
   }
 });
-
+//Delete ONE user by ID
 app.delete('/deleteUser/:id',async (req,res) =>{
   const {id} = req.params
   const client = new MongoClient(mongoDB);
@@ -71,8 +71,24 @@ app.delete('/deleteUser/:id',async (req,res) =>{
     const collectionUser = client.db('Chatt').collection("Users");
 
     await collectionUser.findOneAndDelete({"_id": ObjectId(id)})
-
     res.send('Deleted id: ' + id)
+  }catch (err){
+    console.log(err)
+  } finally {
+    await client.close()
+  }
+})
+
+app.put('/updateUser/:id',async (req,res) =>{
+  const {id} = req.params
+  const {user} = req.body
+  const client = new MongoClient(mongoDB);
+  try{
+    await client.connect()
+    const collectionUser = client.db('Chatt').collection("Users");
+
+    await collectionUser.findOneAndUpdate({"_id": ObjectId(id)}, {$set: {"user" : user }} )
+    res.send('Updated user with: ' + id  +' to: '+ user)
   }catch (err){
     console.log(err)
   } finally {
