@@ -6,7 +6,7 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
-
+// let variable;
 
 describe('/Post user', ()=>{
     it('Post a user', (done)=>{
