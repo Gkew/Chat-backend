@@ -16,7 +16,7 @@ describe('/GET users', ()=>{
         .end((err,res) =>{
              chai.assert.equal(200, res.status);
              chai.assert.typeOf(res.body, 'array')
-             chai.assert.lengthOf(res.body, 7);
+             chai.assert.lengthOf(res.body, 10);
             done();
         })
 
