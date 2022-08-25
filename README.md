@@ -225,3 +225,65 @@ describe('/Post user', ()=>{
 
 ```
 <img src="https://github.com/Gkew/Chat-backend/blob/main/images/test%20post.jpg?raw=true" />
+
+### Testing CRUD, PUT request  
+_Test/put.js_  
+``` js
+process.env.NODE_ENV = 'test';
+
+const mongoose = require('mongoose');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+
+chai.use(chaiHttp);
+const variable = "63064d2a168226aa648554ea";
+
+describe('/Put user by id ', ()=>{
+    it('Update a user', (done)=>{
+
+        let potato = { user : "test"}
+
+        chai.request("http://localhost:3005")
+        .put('/updateUser/' + variable )
+        .send(potato)
+        .end((err,res) =>{
+             chai.assert.equal(200, res.status);
+             chai.assert.equal('Updated user with: ' + variable  +' to: ' + potato.user , res.text)
+            done();
+        })
+
+    })
+})
+
+
+```
+<img src="https://github.com/Gkew/Chat-backend/blob/main/images/put%20request.jpg?raw=true" />  
+
+### Testing CRUD, delete request  
+_Test/delete.js_  
+``` js
+process.env.NODE_ENV = 'test';
+
+const mongoose = require('mongoose');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+
+chai.use(chaiHttp);
+const variable = "63064f878c37d5499f2ac6d4";
+
+describe('/Delete user by id ', ()=>{
+    it('Delete a user by id', (done)=>{
+        chai.request("http://localhost:3005")
+        .delete('/deleteUser/' + variable )
+        .end((err,res) =>{
+             chai.assert.equal(200, res.status);
+             chai.assert.equal('Deleted id: ' + variable , res.text)
+            done();
+        })
+
+    })
+})
+
+```
+<img src="https://github.com/Gkew/Chat-backend/blob/main/images/del%20request.jpg?raw=true" />  
+
