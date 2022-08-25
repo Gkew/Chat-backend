@@ -13,7 +13,7 @@ describe('/Post user', ()=>{
         let user = {
             user : "Testing123"
         }
-        chai.request("http://localhost:3003")
+        chai.request("http://localhost:3005")
         .post('/postUser')
         .send(user)
         .end((err,res) =>{

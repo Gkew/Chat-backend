@@ -10,14 +10,14 @@ const variable = "63064d2a168226aa648554ea";
 describe('/Put user by id ', ()=>{
     it('Update a user', (done)=>{
 
-        let req = "test"
+        let potato = { user : "test"}
 
-        chai.request("http://localhost:3003")
-        .post('/updateUser/' )
-        .send(req)
+        chai.request("http://localhost:3005")
+        .put('/updateUser/' + variable )
+        .send(potato)
         .end((err,res) =>{
              chai.assert.equal(200, res.status);
-             chai.assert.equal('Updated user with: ' + variable  +' to: ' + req , res.body)
+             chai.assert.equal('Updated user with: ' + variable  +' to: ' + potato.user , res.text)
             done();
         })
 
