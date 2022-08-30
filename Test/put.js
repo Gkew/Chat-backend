@@ -12,7 +12,7 @@ describe('/Put user by id ', ()=>{
 
         let potato = { user : "test"}
 
-        chai.request("http://localhost:3005")
+        chai.request("http://localhost:3006")
         .put('/updateUser/' + variable )
         .send(potato)
         .end((err,res) =>{
