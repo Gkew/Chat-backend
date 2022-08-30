@@ -287,3 +287,25 @@ describe('/Delete user by id ', ()=>{
 ```
 <img src="https://github.com/Gkew/Chat-backend/blob/main/images/del%20request.jpg?raw=true" />  
 
+### Dockerfile  
+#### touch Dockerfile  
+_vim dockerfile_  
+``` js
+FROM node:12-alpine
+
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+
+WORKDIR /chat-backend/server.js
+
+COPY package*.json ./
+
+USER node
+
+RUN npm install
+
+COPY --chown=node:node . .
+
+EXPOSE 3000
+
+CMD [ "node", "app.js" ]
+```
