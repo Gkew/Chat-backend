@@ -287,15 +287,23 @@ describe('/Delete user by id ', ()=>{
 ```
 <img src="https://github.com/Gkew/Chat-backend/blob/main/images/del%20request.jpg?raw=true" />  
 
+### Creating MongoDB docker container  
+``` js
+docker run -d --name test-mongodb \
+    -p 27017:27017 \
+    -e MONGO_INITDB_ROOT_USERNAME=root \
+    -e MONGO_INITDB_ROOT_PASSWORD=root \
+    mongo
+    
+    docker logs test-mongodb --follow
+```
 ### Dockerfile  
 #### touch Dockerfile  
 _vim dockerfile_  
 ``` js
 FROM node:12-alpine
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-
-WORKDIR /chat-backend/server.js
+WORKDIR /chat-backend
 
 COPY package*.json ./
 
@@ -303,9 +311,49 @@ USER node
 
 RUN npm install
 
-COPY --chown=node:node . .
-
 EXPOSE 3000
 
-CMD [ "node", "app.js" ]
+```
+### Dockerignore  
+#### touch .dockerignore  
+_node_modules_
+
+### Setup for socket.io  
+_npm i socket.io socket.io-client cors_  
+cd server.js  
+``` js
+const http = require("http");
+const { Server } = require("socket.io");
+const cors = require("cors");
+
+.....
+app.use(cors());
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
+});
+```
+### Setup for firebase  
+``` js
+npm install -g firebase-tools  
+firebase login
+firebase init
+firebase deploy
 ```
