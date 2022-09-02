@@ -2,21 +2,19 @@
 //COLLECTION = Users
 const express = require("express");
 const app = express();
-const http = require("http");
-const { Server } = require("socket.io");
 const cors = require("cors");
 
 //Mockserver on PORT 3000
-const PORT = 3007;
+const PORT = 3001;
+const SOCKETPORT = 3002;
 
 //Socket.io
 app.use(cors());
 
-const server = http.createServer(app);
 
-const io = new Server(server, {
+const io = require("socket.io")(SOCKETPORT, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:8080" ],
     methods: ["GET", "POST"],
   },
 });
@@ -40,7 +38,7 @@ const mongoose = require("mongoose");
 const mongoDB =
   "mongodb+srv://Emmi:banan@cluster0.lzx1kr4.mongodb.net/?retryWrites=true&w=majority";
 
-const User = require("./Models/users.js");
+const User = require("./Models/roomSchema.js");
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -128,3 +126,4 @@ app.put('/updateUser/:id',async (req,res) =>{
 app.listen(PORT, () => {
   console.log(`LISTENING ON PORT ${PORT}`);
 });
+

@@ -1,5 +1,15 @@
 # Chat-backend
 
+### TTFHW  
+#### Backend
+cd workspace  
+mkdir Projectfolder  
+git clone https://github.com/Gkew/Chat-backend.git  
+cd chat-backend  
+npm i  
+_node server.js_
+
+
 ### Creating mockserver with npm
 npm i json-server  
 touch dB.json
@@ -47,7 +57,7 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 
 const User = require('./Models/users.js')
-const mongoDB = 'mongodb+srv://Emmi:banan@cluster0.lzx1kr4.mongodb.net/?retryWrites=true&w=majority';
+const mongoDB = 'mongodb+srv://NAME:PASSWORD@CLUSTER.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, {useNewUrlParser: true,
 useUnifiedTopology: true}).then(() => {
     console.log("Connected")
