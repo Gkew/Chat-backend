@@ -3,11 +3,19 @@
 ### TTFHW  
 #### Backend
 cd workspace  
-mkdir Projectfolder  
+mkdir YOUR_PROJECT_FOLDER  
 git clone https://github.com/Gkew/Chat-backend.git  
 cd chat-backend  
 npm i  
 _node server.js_
+
+#### Frontend  
+cd workspace
+mkdir YOUR_PROJECT_FOLDER
+git clone https://github.com/Gkew/Chat-frontend.git
+cd chat-frontend  
+npm i  
+npm start
 
 
 ### Creating mockserver with npm
