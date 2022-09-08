@@ -8,7 +8,7 @@
  
 
 
-const testId = "6307650ff91b1ad96b8f4b12";
+const testId = "630763f491271649c658b873";
 
  describe('/GET user', () => {
      it('should GET all users', (done) => {
@@ -42,11 +42,11 @@ const testId = "6307650ff91b1ad96b8f4b12";
 
   describe('/Delete user by id ', ()=>{
       it('Delete a user by id', (done)=>{
-          chai.request("http://localhost:3001")
+          chai.request(BACKEND_HOST)
           .delete('/deleteUser/' + testId )
           .end((err,res) =>{
-               chai.assert.equal(200, res.status);
-               chai.assert.equal('Deleted id: ' + testId , res.text)
+            expect(200, res.status);
+            expect('Deleted id: ' + testId , res.text)
               done();
           })
  
