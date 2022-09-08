@@ -2,6 +2,8 @@
 //COLLECTION = Users
 const dotenv = require("dotenv");
 dotenv.config();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -10,6 +12,8 @@ const healthcheck = require('healthcheck')
 //Mockserver on PORT 3000
 const PORT = process.env.PORT;
 const SOCKETPORT = process.env.SOCKETPORT;
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Socket.io
 app.use(cors());
@@ -57,8 +61,22 @@ app.use(cors());
 
 //Get, sending a string
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/dashboard.js");
+  res.send("Hello");
 });
+
+// Routes
+
+// Read
+/**
+ * @openapi
+ * /users:
+ *  get:
+ *    description: Use to fetch all the users
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
+
 //Get all users
 app.get("/allUser", async (req, res) => {
   const client = new MongoClient(mongoDB);
@@ -72,6 +90,7 @@ app.get("/allUser", async (req, res) => {
     await client.close();
   }
 });
+
 //Post new users
 app.post("/postUser", async (req, res) => {
   const client = new MongoClient(mongoDB);
@@ -83,10 +102,7 @@ app.post("/postUser", async (req, res) => {
 
     const collectionUser = client.db('Chatt').collection("Users");
     const data = {
-      user : user,
-      messageText : messageText
-
-
+      user : user
     }
 
     await collectionUser.insertOne(data)
@@ -98,6 +114,7 @@ app.post("/postUser", async (req, res) => {
     await client.close();
   }
 });
+
 //Delete ONE user by ID
 app.delete('/deleteUser/:id',async (req,res) =>{
   const {id} = req.params

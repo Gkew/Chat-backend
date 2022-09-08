@@ -38,6 +38,8 @@
   },
   "homepage": "https://github.com/Gkew/Chat-backend#readme",
   "devDependencies": {
+    "jest": "^29.0.2",
+    "jest-runner-groups": "^2.2.0",
     "request": "^2.88.2",
     "should": "^13.2.3"
   }
