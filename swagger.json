@@ -1,0 +1,11 @@
+{
+    "swaggerDefinition": {
+      "openapi": "3.0.0",
+      "info": { 
+        "title": "Chat-backend", 
+        "version": "1.0.0",
+	"servers": ["http://localhost:3001"]
+        }
+    },
+    "apis": [ "./*.js" ]
+}

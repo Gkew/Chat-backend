@@ -319,22 +319,30 @@ docker run -d --name test-mongodb \
 #### touch Dockerfile  
 _vim dockerfile_  
 ``` js
-FROM node:12-alpine
+FROM node:16
 
-WORKDIR /chat-backend
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-USER node
-
 RUN npm install
+COPY . .
 
-EXPOSE 3000
+EXPOSE 3001
+CMD [ "node", "server.js" ]
 
 ```
 ### Dockerignore  
 #### touch .dockerignore  
-_node_modules_
+_node_modules_  
+#### Creating the dockerbuild  
+_Check for containers_  
+``` js
+docker ps  
+docker ps -a  
+docker build -t tag:name .  
+docker run -p 3000:3000 -d "IMAGE ID"
+```
 
 ### Setup for socket.io  
 _npm i socket.io socket.io-client cors_  
@@ -374,4 +382,25 @@ npm install -g firebase-tools
 firebase login
 firebase init
 firebase deploy
+```
+
+### Setup for swagger  
+cd ws  
+cd PROJECT_FOLDER  
+touch swagger.json  
+npm i swagger-jsdoc swagger-ui-express  
+_vim swagger.json_
+``` js
+{
+    "swaggerDefinition": {
+      "openapi": "3.0.0",
+      "info": { 
+        "title": "Chat-backend", 
+        "version": "1.0.0",
+	"servers": ["http://localhost:3001"]
+        }
+    },
+    "apis": [ "./*.js" ]
+}
+
 ```

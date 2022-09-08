@@ -35,13 +35,15 @@ io.on("connection", (socket) => {
 });
 
 
-
 const { MongoClient, ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 dotenv.config();
 const mongoDB = process.env.DB_HOST;
 
 const User = require("./Models/roomSchema.js");
+const { sendStatus } = require("express/lib/response.js");
+const { Socket } = require("socket.io");
+const { resourceLimits } = require("worker_threads");
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -55,7 +57,7 @@ app.use(cors());
 
 //Get, sending a string
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.sendFile(__dirname + "/dashboard.js");
 });
 //Get all users
 app.get("/allUser", async (req, res) => {
@@ -75,11 +77,6 @@ app.post("/postUser", async (req, res) => {
   const client = new MongoClient(mongoDB);
   const {user} = req.body
 
-  //Emmi lagt till idag
-  const {sentMessage} = req.body
-  const {recivedMessage} = req.body
-  const {messagesTime} = req.body
-
   try {
     await client.connect()
 
@@ -87,10 +84,8 @@ app.post("/postUser", async (req, res) => {
     const collectionUser = client.db('Chatt').collection("Users");
     const data = {
       user : user,
-      //Emmi lagt till idag
-      sentMessage : sentMessage,
-      recivedMessage : recivedMessage,
-      messagesTime : messagesTime,
+      messageText : messageText
+
 
     }
 
