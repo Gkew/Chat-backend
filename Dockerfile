@@ -1,16 +1,11 @@
-FROM node:12-alpine
+FROM node:16
 
-RUN mkdir -p /chat-backend
-
-WORKDIR /chat-backend
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-USER node
-
 RUN npm install
+COPY . .
 
-COPY . /chat-backend
-
-EXPOSE 3000
-
+EXPOSE 3001
+CMD [ "node", "server.js" ]

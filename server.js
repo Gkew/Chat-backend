@@ -1,12 +1,15 @@
 //BD = Chatt
 //COLLECTION = Users
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const healthcheck = require('healthcheck')
 
 //Mockserver on PORT 3000
-const PORT = 3001;
-const SOCKETPORT = 3002;
+const PORT = process.env.PORT;
+const SOCKETPORT = process.env.SOCKETPORT;
 
 //Socket.io
 app.use(cors());
@@ -35,8 +38,8 @@ io.on("connection", (socket) => {
 
 const { MongoClient, ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
-const mongoDB =
-  "mongodb+srv://Emmi:banan@cluster0.lzx1kr4.mongodb.net/?retryWrites=true&w=majority";
+dotenv.config();
+const mongoDB = process.env.DB_HOST;
 
 const User = require("./Models/roomSchema.js");
 mongoose
@@ -47,6 +50,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
+app.use('/health', require('./routes/healthcheck'));
 app.use(cors());
 
 //Get, sending a string
@@ -71,6 +75,11 @@ app.post("/postUser", async (req, res) => {
   const client = new MongoClient(mongoDB);
   const {user} = req.body
 
+  //Emmi lagt till idag
+  const {sentMessage} = req.body
+  const {recivedMessage} = req.body
+  const {messagesTime} = req.body
+
   try {
     await client.connect()
 
@@ -78,6 +87,11 @@ app.post("/postUser", async (req, res) => {
     const collectionUser = client.db('Chatt').collection("Users");
     const data = {
       user : user,
+      //Emmi lagt till idag
+      sentMessage : sentMessage,
+      recivedMessage : recivedMessage,
+      messagesTime : messagesTime,
+
     }
 
     await collectionUser.insertOne(data)
