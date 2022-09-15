@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Server from '../server';
+
+import Server from '../server.js';
 
 if('renders without crashing', () => {
-    expect(1).toEqual(2)
+    expect(true).toEqual(false)
 });
