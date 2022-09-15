@@ -23,6 +23,11 @@
     "start": "nodemon server.js",
     "test": "mocha"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "CI = true npm test"
+    }
+  },
   "name": "chat-backend",
   "description": "### Creating mockserver with npm npm i json-server touch dB.json ``` json {   \"posts\": [     { \"id\": 1, \"title\": \"json-server\", \"author\": \"typicode\" }   ],   \"comments\": [     { \"id\": 1, \"body\": \"some comment\", \"postId\": 1 }   ],   \"profile\": { \"name\": \"typicode\" } } ``` json-server --watch db.json",
   "version": "1.0.0",
@@ -43,10 +48,5 @@
     "jest-runner-groups": "^2.2.0",
     "request": "^2.88.2",
     "should": "^13.2.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "CI=true npm test"
-    }
   }
 }

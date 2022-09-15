@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+
 import Server from '../server';
 
 if('renders without crashing', () => {
