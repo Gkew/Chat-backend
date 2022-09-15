@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha"
+    "test": "CI=true"
   },
   "husky": {
     "hooks": {
