@@ -9,6 +9,7 @@ const app = express();
 const cors = require("cors");
 const healthcheck = require('healthcheck')
 
+const User = require("./Models/roomSchema.js");
 //Mockserver on PORT 3000
 const PORT = process.env.PORT;
 const SOCKETPORT = process.env.SOCKETPORT;
@@ -39,12 +40,11 @@ io.on("connection", (socket) => {
 });
 
 
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient, ObjectId, Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 dotenv.config();
 const mongoDB = process.env.DB_HOST;
 
-const User = require("./Models/roomSchema.js");
 const { sendStatus } = require("express/lib/response.js");
 const { Socket } = require("socket.io");
 const { resourceLimits } = require("worker_threads");
@@ -94,7 +94,9 @@ app.get("/allUser", async (req, res) => {
 //Post new users
 app.post("/postUser", async (req, res) => {
   const client = new MongoClient(mongoDB);
-  const {user} = req.body
+  const {userName, messageText, room} = req.body;
+  const date = Date(Date.now());
+  timestamp = date.toString()
 
   try {
     await client.connect()
@@ -102,7 +104,10 @@ app.post("/postUser", async (req, res) => {
 
     const collectionUser = client.db('Chatt').collection("Users");
     const data = {
-      user : user
+      userName,
+      messageText,
+      room
+
     }
 
     await collectionUser.insertOne(data)

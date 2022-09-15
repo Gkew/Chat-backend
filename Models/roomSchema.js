@@ -1,13 +1,13 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 
 const roomSchema = new mongoose.Schema(
     {
-        roomId: {type: String, required: true, unique: true},
+        roomId: {type: String},
         messageText: {type: String, required: true },
-        messagesTime: {type: String},
-        userName: {type: String},
-        userPic: {type: String}
-    },
+        userName: {type: String}
+        
+    },{ timestamps: true }
 );
 
 module.exports = mongoose.model("room", roomSchema);
