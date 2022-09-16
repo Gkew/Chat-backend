@@ -1,6 +1,6 @@
 
-import Server from '../server.js';
 
-if('renders without crashing', () => {
-    expect(true).toEqual(false)
+test("hello wrold", async() => {
+    expect(2).toEqual(2)
+    expect(1).toEqual(1)
 });

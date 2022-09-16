@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test": "CI=true",
+    "test": "jest",
     "test-message" : "echo Husky Test"
   },
   "husky": {
