@@ -8,11 +8,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const healthcheck = require('healthcheck')
-
-const User = require("./Models/roomSchema.js");
+const userRoutes = require("./routes/userRoutes")
+const messageRoute = require("./routes/messageRoutes")
+// const User = require("./Models/roomSchema.js");
 //Mockserver on PORT 3000
 const PORT = process.env.PORT;
-const SOCKETPORT = process.env.SOCKETPORT;
+// const SOCKETPORT = process.env.SOCKETPORT;
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -20,34 +21,30 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 
 
-const io = require("socket.io")(SOCKETPORT, {
-  cors: {
-    origin: ["http://localhost:8080" ],
-    methods: ["GET", "POST"],
-  },
-});
+// const io = require("socket.io")(SOCKETPORT, {
+//   cors: {
+//     origin: ["http://localhost:8080" ],
+//     methods: ["GET", "POST"],
+//   },
+// });
 
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+// io.on("connection", (socket) => {
+//   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    socket.join(data);
-  });
+//   socket.on("join_room", (data) => {
+//     socket.join(data);
+//   });
 
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
-});
+//   socket.on("send_message", (data) => {
+//     socket.to(data.room).emit("receive_message", data);
+//   });
+// });
 
-
-const { MongoClient, ObjectId, Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 dotenv.config();
 const mongoDB = process.env.DB_HOST;
+const socket = require("socket.io");
 
-const { sendStatus } = require("express/lib/response.js");
-const { Socket } = require("socket.io");
-const { resourceLimits } = require("worker_threads");
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -58,7 +55,7 @@ mongoose
 app.use(express.json());
 app.use('/health', require('./routes/healthcheck'));
 app.use(cors());
-
+app.use("/user", userRoutes)
 //Get, sending a string
 app.get("/", (req, res) => {
   res.send("Hello");
@@ -77,84 +74,108 @@ app.get("/", (req, res) => {
  *        description: A successful response
  */
 
-//Get all users
-app.get("/allUser", async (req, res) => {
-  const client = new MongoClient(mongoDB);
+// //Get all users
+// app.get("/allUser", async (req, res) => {
+//   const client = new MongoClient(mongoDB);
 
-  try {
-    await client.connect();
-    const users = client.db("Chatt").collection("Users");
-    const response = await users.find().toArray();
-    res.send(response);
-  } finally {
-    await client.close();
-  }
-});
+//   try {
+//     await client.connect();
+//     const users = client.db("Chatt").collection("Users");
+//     const response = await users.find().toArray();
+//     res.send(response);
+//   } finally {
+//     await client.close();
+//   }
+// });
 
-//Post new users
-app.post("/postUser", async (req, res) => {
-  const client = new MongoClient(mongoDB);
-  const {userName, messageText, room} = req.body;
-  const date = Date(Date.now());
-  timestamp = date.toString()
+// //Post new users
+// app.post("/postUser", async (req, res) => {
+//   const client = new MongoClient(mongoDB);
+//   const {userName, messageText, room} = req.body;
+//   const date = Date(Date.now());
+//   timestamp = date.toString()
 
-  try {
-    await client.connect()
+//   try {
+//     await client.connect()
 
 
-    const collectionUser = client.db('Chatt').collection("Users");
-    const data = {
-      userName,
-      messageText,
-      room
+//     const collectionUser = client.db('Chatt').collection("Users");
+//     const data = {
+//       userName,
+//       messageText,
+//       room
 
-    }
+//     }
 
-    await collectionUser.insertOne(data)
-    res.send(data)
+//     await collectionUser.insertOne(data)
+//     res.send(data)
 
-  } catch (err) {
-    console.log(err);
-  } finally {
-    await client.close();
-  }
-});
+//   } catch (err) {
+//     console.log(err);
+//   } finally {
+//     await client.close();
+//   }
+// });
 
-//Delete ONE user by ID
-app.delete('/deleteUser/:id',async (req,res) =>{
-  const {id} = req.params
-  const client = new MongoClient(mongoDB);
-  try{
-    await client.connect()
-    const collectionUser = client.db('Chatt').collection("Users");
+// //Delete ONE user by ID
+// app.delete('/deleteUser/:id',async (req,res) =>{
+//   const {id} = req.params
+//   const client = new MongoClient(mongoDB);
+//   try{
+//     await client.connect()
+//     const collectionUser = client.db('Chatt').collection("Users");
 
-    await collectionUser.findOneAndDelete({"_id": ObjectId(id)})
-    res.send('Deleted id: ' + id)
-  }catch (err){
-    console.log(err)
-  } finally {
-    await client.close()
-  }
-})
+//     await collectionUser.findOneAndDelete({"_id": ObjectId(id)})
+//     res.send('Deleted id: ' + id)
+//   }catch (err){
+//     console.log(err)
+//   } finally {
+//     await client.close()
+//   }
+// })
 
-app.put('/updateUser/:id',async (req,res) =>{
-  const {id} = req.params
-  const {user} = req.body
-  const client = new MongoClient(mongoDB);
-  try{
-    await client.connect()
-    const collectionUser = client.db('Chatt').collection("Users");
+// app.put('/updateUser/:id',async (req,res) =>{
+//   const {id} = req.params
+//   const {user} = req.body
+//   const client = new MongoClient(mongoDB);
+//   try{
+//     await client.connect()
+//     const collectionUser = client.db('Chatt').collection("Users");
 
-    await collectionUser.findOneAndUpdate({"_id": ObjectId(id)}, {$set: {"user" : user }} )
-    res.send('Updated user with: ' + id  +' to: '+ user)
-  }catch (err){
-    console.log(err)
-  } finally {
-    await client.close()
-  }
-})
+//     await collectionUser.findOneAndUpdate({"_id": ObjectId(id)}, {$set: {"user" : user }} )
+//     res.send('Updated user with: ' + id  +' to: '+ user)
+//   }catch (err){
+//     console.log(err)
+//   } finally {
+//     await client.close()
+//   }
+// })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`LISTENING ON PORT ${PORT}`);
+});
+
+
+const io = socket(server,{
+  cors:{
+      origin:"http://localhost:3000",
+      credentials: true,
+  }
+})
+
+global.onlineUsers = new Map();
+
+io.on("connection", (socket)=>{
+  global.chatSocket = socket;
+  socket.on("add-user",(userId)=>{
+      onlineUsers.set(userId, socket.id)
+  })
+
+  socket.on("send-msg", (data) => {
+      const sendUserSocket = onlineUsers.get(data.to);
+      if (sendUserSocket) {
+        socket.to(sendUserSocket).emit("msg-recieve", data.message);
+      }
+    });
 });
 
