@@ -1,4 +1,7 @@
- const { expect } = require('chai');
+/**
+ * @group component
+ */
+const { expect } = require('chai');
  const chai = require('chai')
  const chaiHttp = require('chai-http');
  chai.use(chaiHttp);
