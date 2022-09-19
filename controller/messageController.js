@@ -13,7 +13,7 @@ module.exports.addMessage = async (req, res, next) => {
         return res.json({ msg: "Something went wrong"})
     }
     catch(err){
-        next(err)
+        console.log(err)
     }
 };
 
@@ -36,3 +36,7 @@ module.exports.getAllMessages = async (req, res, next) => {
         next(err)
     }
 };
+
+//
+// [{fromSelf:true, message:"this is a message"}, {fromSelf:true, message:"this is a message"}, {fromSelf:true, message:"this is a message"}]
+//

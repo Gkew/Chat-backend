@@ -1,4 +1,4 @@
-const { addMessage, getAllMessages } = require("../controller/messageController");
+const { addMessage, getAllMessages } = require("../controller/messageController.js");
 
 
 

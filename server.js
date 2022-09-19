@@ -56,6 +56,7 @@ app.use(express.json());
 app.use('/health', require('./routes/healthcheck'));
 app.use(cors());
 app.use("/user", userRoutes)
+app.use("/messages", messageRoute)
 //Get, sending a string
 app.get("/", (req, res) => {
   res.send("Hello");
