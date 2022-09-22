@@ -22,7 +22,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "jest",
-    "test-message" : "echo Husky Test"
+    "test-message": "echo Husky Test"
   },
   "husky": {
     "hooks": {
@@ -48,6 +48,7 @@
     "jest": "^29.0.2",
     "jest-runner-groups": "^2.2.0",
     "request": "^2.88.2",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "supertest": "^6.2.4"
   }
 }

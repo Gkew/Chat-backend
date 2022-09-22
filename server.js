@@ -53,7 +53,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
-app.use('/health', require('./routes/healthcheck'));
+
 app.use(cors());
 app.use("/user", userRoutes)
 app.use("/messages", messageRoute)
@@ -75,82 +75,6 @@ app.get("/", (req, res) => {
  *        description: A successful response
  */
 
-// //Get all users
-// app.get("/allUser", async (req, res) => {
-//   const client = new MongoClient(mongoDB);
-
-//   try {
-//     await client.connect();
-//     const users = client.db("Chatt").collection("Users");
-//     const response = await users.find().toArray();
-//     res.send(response);
-//   } finally {
-//     await client.close();
-//   }
-// });
-
-// //Post new users
-// app.post("/postUser", async (req, res) => {
-//   const client = new MongoClient(mongoDB);
-//   const {userName, messageText, room} = req.body;
-//   const date = Date(Date.now());
-//   timestamp = date.toString()
-
-//   try {
-//     await client.connect()
-
-
-//     const collectionUser = client.db('Chatt').collection("Users");
-//     const data = {
-//       userName,
-//       messageText,
-//       room
-
-//     }
-
-//     await collectionUser.insertOne(data)
-//     res.send(data)
-
-//   } catch (err) {
-//     console.log(err);
-//   } finally {
-//     await client.close();
-//   }
-// });
-
-// //Delete ONE user by ID
-// app.delete('/deleteUser/:id',async (req,res) =>{
-//   const {id} = req.params
-//   const client = new MongoClient(mongoDB);
-//   try{
-//     await client.connect()
-//     const collectionUser = client.db('Chatt').collection("Users");
-
-//     await collectionUser.findOneAndDelete({"_id": ObjectId(id)})
-//     res.send('Deleted id: ' + id)
-//   }catch (err){
-//     console.log(err)
-//   } finally {
-//     await client.close()
-//   }
-// })
-
-// app.put('/updateUser/:id',async (req,res) =>{
-//   const {id} = req.params
-//   const {user} = req.body
-//   const client = new MongoClient(mongoDB);
-//   try{
-//     await client.connect()
-//     const collectionUser = client.db('Chatt').collection("Users");
-
-//     await collectionUser.findOneAndUpdate({"_id": ObjectId(id)}, {$set: {"user" : user }} )
-//     res.send('Updated user with: ' + id  +' to: '+ user)
-//   }catch (err){
-//     console.log(err)
-//   } finally {
-//     await client.close()
-//   }
-// })
 
 const server = app.listen(PORT, () => {
   console.log(`LISTENING ON PORT ${PORT}`);
