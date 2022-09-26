@@ -49,26 +49,3 @@ module.exports.getAllMessages = async (req, res, next) => {
 // [{fromSelf:true, message:"this is a message"}, {fromSelf:true, message:"this is a message"}, {fromSelf:true, message:"this is a message"}]
 //
 
-// Post a new user
-//  const newUser = {
-//   userId : "aJQwXgDy5NMkrwgAzsSoMYA6adaw2",
-//   displayName : "test_name",
-//   photoUrl : "https://lh3.googleusercontent.com/a/AItbvmmJLXCNJcMRMo3C_TsrVL-7sbEUeeHSyJHUprvz=s96-c"
-// }
-// describe("POST a new user", () => {
-//   it("should add new user", (done) => {
-//       chai.request(BACKEND_HOST)
-//       .post('/user/adduser')
-//       .send(newUser)
-//       .end((err, res) => {
-//           expect(res.statusCode).to.equal(200);
-//           expect(res.body).to.not.be.null;
-//           const lastItem = JSON.parse(res.text)
-//           expect(lastItem.user.userId).to.equal(newUser.userId);
-//           expect(lastItem.user.displayName).to.equal(newUser.displayName);
-//           expect(lastItem.user.photoUrl).to.equal(newUser.photoUrl);
-//         done()
-        
-//       })
-// })
-// })
