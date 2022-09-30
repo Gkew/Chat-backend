@@ -52,6 +52,11 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+// app.use(express.public("functions"));
+
+app.use("/public", express.static("/functions"))
+
+
 app.use(express.json());
 app.use('/health', require('./routes/healthcheck'));
 app.use(cors());
