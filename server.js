@@ -54,7 +54,7 @@ mongoose
 
 // app.use(express.public("functions"));
 
-app.use("/public", express.static("/functions"))
+app.use("/public", express.static("./functions"))
 
 
 app.use(express.json());
