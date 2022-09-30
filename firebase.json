@@ -5,6 +5,21 @@
       ".git",
       "firebase-debug.log",
       "firebase-debug.*.log"
+    ],
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "functions",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }
