@@ -12,6 +12,7 @@
     "mongoose": "^6.5.2",
     "node": "^16.17.0",
     "nodemon": "^2.0.19",
+    "react-scripts": "^5.0.1",
     "socket-io": "^1.0.0",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
@@ -22,7 +23,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "jest --detectOpenHandles",
-    "test-message": "echo Husky Test"
+    "test-message": "echo Husky Test",
+    "build": "react-scripts build"
   },
   "husky": {
     "hooks": {
