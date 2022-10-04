@@ -12,6 +12,6 @@ jobs:
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          repoToken: '${{ secrets.TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHATTIS_BACKEND_3F95B }}'
           projectId: chattis-backend-3f95b
