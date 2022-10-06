@@ -1,11 +1,9 @@
 const messageModel = require("../Models/messageSchema")
-var Stopwatch = require('timer-stopwatch');
 
 
 module.exports.addMessage = async (req, res) => {
 
     try{
-        var stopwatch = new Stopwatch();
         const {from,to ,message} = req.body;
 
 
